@@ -34,10 +34,9 @@ export function AttachmentList({ adjuntos }: AttachmentListProps) {
           <a
             href={adjunto.url}
             className="btn btn--ghost btn--sm"
-            download
-            onClick={(e) => {
-              if (adjunto.url === '#') e.preventDefault();
-            }}
+            target="_blank"
+            rel="noopener noreferrer"
+            download={adjunto.nombre}
           >
             Descargar
           </a>

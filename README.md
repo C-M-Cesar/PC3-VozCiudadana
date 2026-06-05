@@ -13,20 +13,41 @@ Plataforma web de participación ciudadana donde los usuarios publican sugerenci
 
 ```
 DesarrolloPC2/
-├── frontend/     # React + TypeScript + Vite (implementado)
-└── backend/      # Python + MongoDB (pendiente)
+├── frontend/     # React + TypeScript + Vite
+└── backend/      # Python + FastAPI + MongoDB
 ```
 
-## Frontend
+## Inicio rápido
 
-Ver [frontend/README.md](frontend/README.md).
+### Backend
 
 ```bash
-cd frontend && npm install && npm run dev
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # configurar MONGO_URI
+python run.py
 ```
 
-## Backend (próximo paso)
+Documentación API: http://localhost:8000/docs
 
-- Lenguaje: Python (FastAPI recomendado)
-- Base de datos: MongoDB
-- Endpoints REST compatibles con el frontend
+### Frontend
+
+```bash
+cd frontend
+npm install
+cp .env.example .env
+# VITE_USE_MOCK=false
+npm run dev
+```
+
+App: http://localhost:5173
+
+## Patrones estructurales (backend)
+
+- **Facade** — `SugerenciaFacade` coordina validación, persistencia y reglas de negocio
+- **Proxy** — `AdjuntoProxy` carga archivos bajo demanda
+- **Adapter** — `LocalStorageAdapter` desacopla el almacenamiento de adjuntos
+
+Ver detalles en [backend/README.md](backend/README.md).

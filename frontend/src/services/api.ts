@@ -20,7 +20,13 @@ export async function apiRequest<T>(
     let message = 'Ocurrió un error en la solicitud';
     try {
       const body = await response.json();
-      message = body.detail ?? body.message ?? message;
+      if (typeof body.detail === 'string') {
+        message = body.detail;
+      } else if (Array.isArray(body.detail) && body.detail[0]?.msg) {
+        message = body.detail[0].msg;
+      } else {
+        message = body.message ?? message;
+      }
     } catch {
       message = response.statusText || message;
     }
